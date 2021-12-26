@@ -21,9 +21,13 @@ jobs:
       uses: actions/setup-python@v2
       with:
         python-version: 3.8
+   
     - name: Install dependencies
       run: |
-       pip install -e .['dev'] 
+        python -m pip install --upgrade pip
+        pip install flake8 pytest
+        if [ -f requirements.txt ]; then pip install -r requirements.txt; fi 
+
     - name: Set a dummy secret key
       run: echo "::set-env name=FLASK_SECRET_KEY::avocodes01"
          
