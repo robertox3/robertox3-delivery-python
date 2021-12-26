@@ -23,14 +23,10 @@ jobs:
         python-version: 3.8
     - name: Install dependencies
       run: |
-       make install
+       pip install -e .['dev'] 
     - name: Set a dummy secret key
       run: echo "::set-env name=FLASK_SECRET_KEY::avocodes01"
-
-    - name: Database Migrations
-      run: |
-       make init_db
-       
+         
     - name: Run tests
       run: |
-       make test
+       FLASK_ENV=test pytest tests/ -v --cov=delivery
